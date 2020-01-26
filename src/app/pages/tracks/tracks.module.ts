@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TracksPage } from './tracks.page';
+import { TracksService } from '../../services/tracks.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,14 @@ import { TracksPage } from './tracks.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: TracksPage }])
   ],
-  declarations: [TracksPage]
+  declarations: [TracksPage], 
+  providers: [TracksService]
 })
-export class TracksPageModule {}
+export class TracksPageModule {
+
+  constructor(private TracksService: TracksService) { }
+  ngOnInit() { 
+    this.TracksService.getTracksDataList();
+  }
+
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TracksService } from '../../services/tracks.service';
 
 @Component({
   selector: 'app-tracks',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class TracksPage {
 
-  constructor() {}
+  trackList;
+  results: any[];
 
+  constructor(private TracksService: TracksService) {}
+  
+  ngOnInit(){
+    this.TracksService.getTracksDataList()
+    .subscribe(
+      (data) => { this.trackList = data && data['results'].items;},
+      (error) => {console.log(error)}
+    )
+  }
 }
