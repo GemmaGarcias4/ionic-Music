@@ -6,10 +6,25 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content>
-    <ion-list>
-      <ion-item *ngFor="let track of trackList">
-        {{track.title}}
-      </ion-item>
-    </ion-list>
+  <ion-content padding fullscreen>
+    <ion-grid>
+      <ion-row>
+        <ion-col 
+          size="2" 
+          size-xs="12" 
+          size-sm= "6"
+          size-md= "4"
+          size-lg= "2" *ngFor="let track of trackList">
+          <ion-card class="fixline">
+            <img src="{{track.image_52x52}}" />
+            <ion-card-header>
+              <ion-card-title class="no-wrap">{{track.title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{track.type}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-content>
