@@ -1,5 +1,13 @@
-.no-wrap {
-    overflow:hidden;
-    white-space:nowrap;
+.header-border-bottom{
+    border-bottom: 2px solid #49aaf1;
+}
+
+.no-wrap-text {
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.align-list-items{
+    text-align: center;
 }

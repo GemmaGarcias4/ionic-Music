@@ -1,0 +1,13 @@
+.body-app{
+    background-color: #eceeed;
+    .maxWithLg{
+        margin: 0 auto;
+        padding: 0;
+        @media (min-width: 960px){
+            max-width: 960px;
+        }
+        .background-white{
+            background-color: white; 
+        }
+    }
+}

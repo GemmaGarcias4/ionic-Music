@@ -8,7 +8,7 @@ import { TracksService } from '../../services/tracks.service';
 })
 export class TracksPage {
 
-  trackList;
+  groupedList = [];
   results: any[];
 
   constructor(private TracksService: TracksService) {}
@@ -16,8 +16,17 @@ export class TracksPage {
   ngOnInit(){
     this.TracksService.getTracksDataList()
     .subscribe(
-      (data) => { this.trackList = data && data['results'].items;},
+      (data) => { data && this.groupedArray(data['results'].items);},
       (error) => {console.log(error)}
     )
+  }
+
+  groupedArray(data: any){
+    data.forEach((group, idx) => {
+      if (idx % 5 === 0) {
+        this.groupedList.push([]);
+      }
+      this.groupedList[this.groupedList.length - 1].push(group);
+    })
   }
 }

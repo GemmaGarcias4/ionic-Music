@@ -1,30 +1,33 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="header-border-bottom">
       <ion-title>
-        Tracks
+        Music Time! Lite
       </ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content padding fullscreen>
-    <ion-grid>
-      <ion-row>
-        <ion-col 
-          size="2" 
-          size-xs="12" 
-          size-sm= "6"
-          size-md= "4"
-          size-lg= "2" *ngFor="let track of trackList">
-          <ion-card class="fixline">
-            <img src="{{track.image_52x52}}" />
-            <ion-card-header>
-              <ion-card-title class="no-wrap">{{track.title}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              {{track.type}}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-list *ngFor="let groups of groupedList" class="align-list-items">
+        <ion-grid>
+          <ion-row>
+            <ion-col 
+              size="2" 
+              size-xs="12" 
+              size-sm= "6"
+              size-md= "4"
+              size-lg= "2.4"  *ngFor="let item of groups">
+                <ion-card class="fixline">
+                  <img src="{{item.image_52x52}}" />
+                  <ion-card-header>
+                    <ion-card-title class="no-wrap-text">{{item.title}}</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{item.type}}
+                  </ion-card-content>
+                </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <img src="../../../assets/img/app-banner.png" />
+    </ion-list>
   </ion-content>
