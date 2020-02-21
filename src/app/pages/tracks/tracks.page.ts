@@ -9,15 +9,14 @@ import { TracksService } from '../../services/tracks.service';
 export class TracksPage {
 
   groupedList = [];
-  results: any[];
 
-  constructor(private TracksService: TracksService) {}
-  
+  constructor(private tracksService: TracksService) {}
+
   ngOnInit(){
-    this.TracksService.getTracksDataList()
+    this.tracksService.getTracksDataList()
     .subscribe(
-      (data) => { data && this.groupedArray(data['results'].items);},
-      (error) => {console.log(error)}
+      (data) => { this.groupedArray(data['results'].items); },
+      (error) => {console.log(error); }
     )
   }
 
@@ -27,6 +26,6 @@ export class TracksPage {
         this.groupedList.push([]);
       }
       this.groupedList[this.groupedList.length - 1].push(group);
-    })
+    });
   }
 }

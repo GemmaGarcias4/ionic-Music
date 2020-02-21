@@ -13,14 +13,15 @@ import { TracksService } from '../../services/tracks.service';
     FormsModule,
     RouterModule.forChild([{ path: '', component: TracksPage }])
   ],
-  declarations: [TracksPage], 
+  declarations: [TracksPage],
   providers: [TracksService]
 })
 export class TracksPageModule {
 
-  constructor(private TracksService: TracksService) { }
-  ngOnInit() { 
-    this.TracksService.getTracksDataList();
+  constructor(private tracksService: TracksService) { }
+
+  ngOnInit() {
+    this.tracksService.getTracksDataList();
   }
 
 }
