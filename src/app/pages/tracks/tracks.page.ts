@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TracksService } from '../../services/tracks.service';
 
 @Component({
@@ -6,18 +6,18 @@ import { TracksService } from '../../services/tracks.service';
   templateUrl: 'tracks.page.html',
   styleUrls: ['tracks.page.scss']
 })
-export class TracksPage {
+export class TracksPage implements OnInit {
 
   groupedList = [];
 
   constructor(private tracksService: TracksService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.tracksService.getTracksDataList()
     .subscribe(
       (data) => { this.groupedArray(data['results'].items); },
       (error) => {console.log(error); }
-    )
+    );
   }
 
   groupedArray(data: any){
