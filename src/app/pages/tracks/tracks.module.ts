@@ -16,12 +16,9 @@ import { TracksService } from '../../services/tracks.service';
   declarations: [TracksPage],
   providers: [TracksService]
 })
+
 export class TracksPageModule {
 
   constructor(private tracksService: TracksService) { }
-
-  ngOnInit() {
-    this.tracksService.getTracksDataList();
-  }
 
 }

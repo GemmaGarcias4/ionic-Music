@@ -20,7 +20,7 @@ export class TracksPage implements OnInit {
     );
   }
 
-  groupedArray(data: any){
+  groupedArray(data: any) {
     data.forEach((group, idx) => {
       if (idx % 5 === 0) {
         this.groupedList.push([]);

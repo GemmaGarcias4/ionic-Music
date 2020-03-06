@@ -16,7 +16,7 @@
               size-sm= "6"
               size-md= "4"
               size-lg= "2.4"  *ngFor="let item of groups">
-                <ion-card class="fixline">
+                <ion-card [routerLink]="[item.id]" class="fixline" routerDirection="forward">
                   <img src="{{item.image_52x52}}" />
                   <ion-card-header>
                     <ion-card-title class="no-wrap-text">{{item.title}}</ion-card-title>
