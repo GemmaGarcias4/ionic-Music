@@ -21,7 +21,7 @@ export class TracksPage implements OnInit {
   }
 
   groupedArray(data: any) {
-    data.forEach((group, idx) => {
+    data.forEach((group: any, idx: number) => {
       if (idx % 5 === 0) {
         this.groupedList.push([]);
       }

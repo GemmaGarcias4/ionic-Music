@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TracksService } from '../../services/tracks.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-track-detail',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrackDetailPage implements OnInit {
 
-  constructor() { }
+  trackId: any;
+  detailData: any;
+
+  constructor(private route: ActivatedRoute, private tracksService: TracksService) { }
 
   ngOnInit() {
+    this.trackId = this.route.snapshot.paramMap.get('id');
+    this.tracksService.getTrackDetail(this.trackId)
+    .subscribe(
+      (data: any) => this.detailData = data,
+      (error: any) => {console.log(error); }
+    );
   }
 
 }
