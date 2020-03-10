@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { TracksService} from './services/tracks.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    NativeAudio,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     TracksService
   ],
