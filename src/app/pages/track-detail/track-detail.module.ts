@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { BoardComponent } from './board/board.component';
+
 import { TrackDetailPage } from './track-detail.page';
 
 @NgModule({
@@ -14,6 +16,6 @@ import { TrackDetailPage } from './track-detail.page';
     IonicModule,
     RouterModule.forChild([{ path: '', component: TrackDetailPage }])
   ],
-  declarations: [TrackDetailPage]
+  declarations: [TrackDetailPage, BoardComponent]
 })
 export class TrackDetailPageModule {}
