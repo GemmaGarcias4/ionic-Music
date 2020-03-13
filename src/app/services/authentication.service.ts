@@ -11,20 +11,22 @@ const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
-  constructor(private storage: Storage, private plt: Platform) { 
+
+  constructor(private storage: Storage, private plt: Platform) {
     this.plt.ready().then(() => {
       this.checkToken();
-    })
+    });
   }
 
-  login() {
-    return this.storage.set(TOKEN_KEY, 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==').then( res =>{
+  login(form: { value: any; }) {
+    console.log('form:', form.value);
+    return this.storage.set(TOKEN_KEY, 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==').then( res => {
       this.authenticationState.next(true);
     });
   }
 
   logout() {
-    return this.storage.remove(TOKEN_KEY).then( () =>{
+    return this.storage.remove(TOKEN_KEY).then( () => {
       this.authenticationState.next(false);
     });
   }
