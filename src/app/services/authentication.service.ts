@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import authdata from '../../assets/authdata.json';
 
 const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
@@ -12,9 +12,8 @@ const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
-  data: any;
 
-  constructor(private storage: Storage, private plt: Platform) {
+  constructor(private storage: Storage, private plt: Platform, public toastController: ToastController) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -23,10 +22,14 @@ export class AuthenticationService {
   async verifyUser( value: { email: string; password: string; } ) {
     const isMember = authdata.filter((member) => JSON.stringify(member) === JSON.stringify(value)).length !== 0;
     if (isMember) {
-      await this.storage.set(TOKEN_KEY, TOKEN_KEY);
+      await this.storage.set('token', TOKEN_KEY);
       this.authenticationState.next(true);
     } else {
-      console.log('error');
+      this.toastController.create({
+        message: 'You have entered an invalid username or password',
+        duration: 2000,
+        color: 'danger'
+      });
     }
   }
 
@@ -44,7 +47,7 @@ export class AuthenticationService {
   }
 
   async checkToken() {
-    const res = await this.storage.get(TOKEN_KEY);
+    const res = await this.storage.get('token');
     if (res) {
       this.authenticationState.next(true);
     }
