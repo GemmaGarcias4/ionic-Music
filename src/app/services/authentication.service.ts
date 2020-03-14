@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
 import authdata from '../../assets/authdata.json';
 
 const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
@@ -15,7 +14,7 @@ export class AuthenticationService {
   authenticationState = new BehaviorSubject(false);
   data: any;
 
-  constructor(private storage: Storage, private plt: Platform, private http: HttpClient) {
+  constructor(private storage: Storage, private plt: Platform) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
