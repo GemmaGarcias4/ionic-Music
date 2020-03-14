@@ -20,5 +20,4 @@ import { TracksService } from '../../services/tracks.service';
 export class TracksPageModule {
 
   constructor(private tracksService: TracksService) { }
-
 }

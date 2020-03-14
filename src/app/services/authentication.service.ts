@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import authdata from '../../assets/authdata.json';
 
 const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 
@@ -11,33 +13,41 @@ const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
+  data: any;
 
-  constructor(private storage: Storage, private plt: Platform) {
+  constructor(private storage: Storage, private plt: Platform, private http: HttpClient) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
   }
 
-  login(form: { value: any; }) {
-    console.log('form:', form.value);
-    return this.storage.set(TOKEN_KEY, 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==').then( res => {
+  async verifyUser( value: { email: string; password: string; } ) {
+    const isMember = authdata.filter((member) => JSON.stringify(member) === JSON.stringify(value)).length !== 0;
+    if (isMember) {
+      await this.storage.set(TOKEN_KEY, TOKEN_KEY);
       this.authenticationState.next(true);
-    });
+    } else {
+      console.log('error');
+    }
   }
 
-  logout() {
-    return this.storage.remove(TOKEN_KEY).then( () => {
-      this.authenticationState.next(false);
-    });
+  login(form: { value: any; }) {
+    this.verifyUser(form.value);
+  }
+
+  async logout() {
+    await this.storage.remove(TOKEN_KEY);
+    this.authenticationState.next(false);
   }
 
   isAuthenticated() {
     return this.authenticationState.value;
   }
 
-  checkToken() {
-    return this.storage.get(TOKEN_KEY).then( res => {
-      if (res) { this.authenticationState.next(true) }
-    });
+  async checkToken() {
+    const res = await this.storage.get(TOKEN_KEY);
+    if (res) {
+      this.authenticationState.next(true);
+    }
   }
 }
