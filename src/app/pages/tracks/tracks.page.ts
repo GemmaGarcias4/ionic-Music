@@ -16,7 +16,7 @@ export class TracksPage implements OnInit {
   ngOnInit() {
     this.tracksService.getTracksDataList()
     .subscribe(
-      (data) => { this.groupedArray(data['results'].items); },
+      (data) => { this.groupedArray(data['items']); },
       (error) => {console.log(error); }
     );
   }

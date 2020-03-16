@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 @Injectable()
 export class TracksService {
 
@@ -12,6 +13,8 @@ export class TracksService {
     headers = headers.set('Authorization', 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==');
     return this.http.get(
       `${this.urlBase}?except_attributes=tracks&user_id=1372a510-60b0-42c1-a3e1-8bdc64d37152`, {headers}
+    ).pipe(
+      map(res => res['results'])
     );
   }
 
