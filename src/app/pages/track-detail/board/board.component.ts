@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  @Input('detailData') detailData: any;
+  @Input() detailData: any;
   dataObj: any;
 
   constructor() { }

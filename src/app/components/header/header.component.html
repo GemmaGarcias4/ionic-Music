@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar class="header-border-bottom">
+    <ion-buttons [hidden]="!showBackButton" slot="start" color="light">
+      <ion-back-button defaultHref="tracks"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">
+      {{title}}
+    </ion-title>
+    <ion-button slot="end" fill="clear" shape="round" (click)="logout()">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>

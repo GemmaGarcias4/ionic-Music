@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TracksService } from '../../services/tracks.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-tracks',
@@ -11,7 +10,7 @@ export class TracksPage implements OnInit {
 
   groupedList = [];
 
-  constructor(private tracksService: TracksService, private authService: AuthenticationService) {}
+  constructor(private tracksService: TracksService) {}
 
   ngOnInit() {
     this.tracksService.getTracksDataList()
@@ -28,9 +27,5 @@ export class TracksPage implements OnInit {
       }
       this.groupedList[this.groupedList.length - 1].push(group);
     });
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }
