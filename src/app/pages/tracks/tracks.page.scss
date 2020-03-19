@@ -1,7 +1,3 @@
-.header-border-bottom{
-    border-bottom: 2px solid #49aaf1;
-}
-
 .no-wrap-text {
     overflow: hidden;
     white-space: nowrap;
@@ -10,4 +6,13 @@
 
 .align-list-items{
     text-align: center;
+    @media (max-width: 576px) {
+        text-align: left;
+    }
+    ion-card {
+        &.no-border {
+           border: none !important; 
+           box-shadow: none;
+        }
+    }
 }

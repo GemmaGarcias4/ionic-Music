@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform, ToastController } from '@ionic/angular';
 import authdata from '../../assets/authdata.json';
+import { TextAst } from '@angular/compiler';
 
 const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 
@@ -25,11 +26,12 @@ export class AuthenticationService {
       await this.storage.set('token', TOKEN_KEY);
       this.authenticationState.next(true);
     } else {
-      this.toastController.create({
+      const toast = this.toastController.create({
         message: 'You have entered an invalid username or password',
         duration: 2000,
         color: 'danger'
       });
+      (await toast).present();
     }
   }
 
