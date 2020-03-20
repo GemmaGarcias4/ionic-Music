@@ -2,7 +2,7 @@
 
 <ion-content>
   <app-board [detailData] = "detailData"></app-board>
-  <ion-list *ngFor="let item of detailData && detailData.playlist.tracks.items" class="align-list-items">
+  <ion-list *ngIf="detailData" *ngFor="let item of detailData.playlist.tracks.items" class="align-list-items">
     <ion-item>
       <ion-avatar slot="start">
         <img src="../../../assets/img/play-song.png">
