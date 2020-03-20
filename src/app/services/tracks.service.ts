@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RootObject } from '../interfaces/interfaces';
+
 @Injectable()
 export class TracksService {
 
@@ -10,7 +12,7 @@ export class TracksService {
   getTracksDataList() {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==');
-    return this.http.get(
+    return this.http.get<RootObject>(
       `${this.urlBase}?except_attributes=tracks&user_id=1372a510-60b0-42c1-a3e1-8bdc64d37152`, {headers}
     );
   }
