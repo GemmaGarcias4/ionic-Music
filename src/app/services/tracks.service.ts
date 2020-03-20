@@ -1,27 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, RootRenderer } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RootObject } from '../interfaces/interfaces';
+import { environment } from '../../environments/environment';
 
+const urlBase = environment.apiUrl;
+
+const headers = new HttpHeaders({
+  Authorization: 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA=='
+});
 @Injectable()
 export class TracksService {
 
-  urlBase = 'https://edge.musictime.app/api/v1/playlists';
-
   constructor(private http: HttpClient) { }
 
+  private executeQuery<T>( query: string ) {
+    query = urlBase + query;
+    return this.http.get<T>(query, {headers});
+  }
+
   getTracksDataList() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==');
-    return this.http.get<RootObject>(
-      `${this.urlBase}?except_attributes=tracks&user_id=1372a510-60b0-42c1-a3e1-8bdc64d37152`, {headers}
-    );
+    return this.executeQuery<RootObject>('/playlists?except_attributes=tracks&user_id=1372a510-60b0-42c1-a3e1-8bdc64d37152');
   }
 
   getTrackDetail( trackId: any ) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==');
-    return this.http.get(
-      `${this.urlBase}/${trackId}?user_id=d89dfdf8-f683-41df-beef-8b6b96936185`, {headers}
-    );
+    return this.executeQuery(`/playlists'/${trackId}?user_id=d89dfdf8-f683-41df-beef-8b6b96936185`);
   }
 }
