@@ -8,7 +8,7 @@ import { Item } from 'src/app/interfaces/interfaces';
 })
 export class TracksPage implements OnInit {
 
-  groupedList: Item[] = [];
+  groupedList = [];
 
   constructor(private tracksService: TracksService) {}
 
