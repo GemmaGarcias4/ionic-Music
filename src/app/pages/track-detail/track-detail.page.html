@@ -4,7 +4,7 @@
   <app-board [detailData] = "detailData"></app-board>
   <ion-list *ngFor="let item of detailData && detailData.playlist.tracks.items" class="align-list-items">
     <ion-item>
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" (click)="playTrack()">
         <img src="../../../assets/img/play-song.png">
       </ion-avatar>
       <ion-label>
@@ -12,6 +12,12 @@
         <p>{{item.artist_name}}</p>
         <p slot="end">{{item.year}}</p>
       </ion-label>
+      <ion-label slot="end" text-right>
+        <ion-button fill="clear" shape="round" color="dark" (click)='handleLoop()'>
+          <ion-icon slot="icon-only" name="repeat"></ion-icon>
+        </ion-button>
+      </ion-label>
     </ion-item>
   </ion-list>
+  <app-audio-player></app-audio-player>
 </ion-content>

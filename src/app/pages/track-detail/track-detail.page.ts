@@ -11,6 +11,7 @@ export class TrackDetailPage implements OnInit {
 
   trackId: any;
   detailData: any;
+  loop = false;
 
   constructor(private route: ActivatedRoute, private tracksService: TracksService) { }
 
@@ -21,6 +22,10 @@ export class TrackDetailPage implements OnInit {
       (data: any) => this.detailData = data,
       (error: any) => {console.log(error); }
     );
+  }
+
+  handleLoop() {
+    this.loop = !this.loop;
   }
 
 }

@@ -2,15 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    AudioPlayerComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    AudioPlayerComponent
   ],
   imports: [
     CommonModule,
