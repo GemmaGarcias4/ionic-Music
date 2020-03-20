@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TracksService } from '../../services/tracks.service';
-
 @Component({
   selector: 'app-tracks',
   templateUrl: 'tracks.page.html',
@@ -15,13 +14,13 @@ export class TracksPage implements OnInit {
   ngOnInit() {
     this.tracksService.getTracksDataList()
     .subscribe(
-      (data) => { this.groupedArray(data['results'].items); },
+      (res) => { this.groupedArray(res.results.items); },
       (error) => {console.log(error); }
     );
   }
 
-  groupedArray(data: any) {
-    data.forEach((group: any, idx: number) => {
+  groupedArray(items: any) {
+    items.forEach((group: any, idx: number) => {
       if (idx % 5 === 0) {
         this.groupedList.push([]);
       }
