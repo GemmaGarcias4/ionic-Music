@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { TracksService } from '../../services/tracks.service';
-import { Item } from 'src/app/interfaces/interfaces';
+import { PlaylistsService } from '../../services/playlists.service';
+import { Item } from 'src/app/interfaces/playlists/list';
 @Component({
-  selector: 'app-tracks',
-  templateUrl: 'tracks.page.html',
-  styleUrls: ['tracks.page.scss']
+  selector: 'app-playlists',
+  templateUrl: 'playlists.page.html',
+  styleUrls: ['playlists.page.scss']
 })
-export class TracksPage implements OnInit {
+export class PlaylistsPage implements OnInit {
 
   groupedList = [];
 
-  constructor(private tracksService: TracksService) {}
+  constructor(private playlistsService: PlaylistsService) {}
 
   ngOnInit() {
-    this.tracksService.getTracksDataList()
+    this.playlistsService.getPlaylistDataList()
     .subscribe(
       (res) => { this.groupedArray(res.results.items); },
       (error) => {console.log(error); }

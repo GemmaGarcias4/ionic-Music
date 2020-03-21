@@ -1,8 +1,8 @@
-<app-header title="Track detail" [hasBackButton]=true></app-header>
+<app-header title="Playlist detail" [hasBackButton]=true></app-header>
 
-<ion-content>
+<ion-content *ngIf="detailData">
   <app-board [detailData] = "detailData"></app-board>
-  <ion-list *ngIf="detailData" *ngFor="let item of detailData.playlist.tracks.items" class="align-list-items">
+  <ion-list *ngFor="let item of detailData.playlist.tracks.items" class="align-list-items">
     <ion-item>
       <ion-avatar slot="start">
         <img src="../../../assets/img/play-song.png">

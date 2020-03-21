@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { BoardComponent } from './board/board.component';
 
-import { TrackDetailPage } from './track-detail.page';
+import { PlaylistDetailPage } from './playlist-detail.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -15,9 +15,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([{ path: '', component: TrackDetailPage }]),
+    RouterModule.forChild([{ path: '', component: PlaylistDetailPage }]),
     ComponentsModule
   ],
-  declarations: [TrackDetailPage, BoardComponent]
+  declarations: [PlaylistDetailPage, BoardComponent]
 })
-export class TrackDetailPageModule {}
+export class PlaylistDetailPageModule {}

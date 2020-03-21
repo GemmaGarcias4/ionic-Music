@@ -1,4 +1,5 @@
-export interface RootObject {
+// Playlist data list interfaces
+export interface RootObjectList {
     results: Results;
   }
 

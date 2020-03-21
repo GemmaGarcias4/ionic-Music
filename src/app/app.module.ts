@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TracksService} from './services/tracks.service';
+import { PlaylistsService} from './services/playlists.service';
 import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +28,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    TracksService
+    PlaylistsService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'tracks', loadChildren: '../pages/tracks/tracks.module#TracksPageModule' },
-  { path: 'tracks/:id', loadChildren: '../pages/track-detail/track-detail.module#TrackDetailPageModule' }
+  { path: 'playlists', loadChildren: '../pages/playlists/playlists.module#PlaylistsPageModule' },
+  { path: 'playlists/:id', loadChildren: '../pages/playlist-detail/playlist-detail.module#PlaylistDetailPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

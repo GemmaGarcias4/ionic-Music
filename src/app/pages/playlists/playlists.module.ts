@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TracksPage } from './tracks.page';
-import { TracksService } from '../../services/tracks.service';
+import { PlaylistsPage } from './playlists.page';
+import { PlaylistsService } from '../../services/playlists.service';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -12,14 +12,14 @@ import { ComponentsModule } from '../../components/components.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: TracksPage }]),
+    RouterModule.forChild([{ path: '', component: PlaylistsPage }]),
     ComponentsModule
   ],
-  declarations: [TracksPage],
-  providers: [TracksService]
+  declarations: [PlaylistsPage],
+  providers: [PlaylistsService]
 })
 
-export class TracksPageModule {
+export class PlaylistsPageModule {
 
-  constructor(private tracksService: TracksService) { }
+  constructor(private playlistsService: PlaylistsService) { }
 }
