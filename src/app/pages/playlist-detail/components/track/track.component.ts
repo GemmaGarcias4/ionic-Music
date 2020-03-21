@@ -20,7 +20,7 @@ export class TrackComponent implements OnInit {
   }
 
   handlePlay() {
-    console.log(this.track)
+    console.log(this.track);
   }
 
 }
