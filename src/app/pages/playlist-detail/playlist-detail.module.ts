@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BoardComponent } from './board/board.component';
+import { BoardComponent } from './components/board/board.component';
 
 import { PlaylistDetailPage } from './playlist-detail.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TrackComponent } from './components/track/track.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ComponentsModule } from 'src/app/components/components.module';
     RouterModule.forChild([{ path: '', component: PlaylistDetailPage }]),
     ComponentsModule
   ],
-  declarations: [PlaylistDetailPage, BoardComponent]
+  declarations: [PlaylistDetailPage, BoardComponent, TrackComponent]
 })
 export class PlaylistDetailPageModule {}

@@ -1,0 +1,15 @@
+<ion-item>
+  <ion-avatar slot="start" (click)="handlePlay()" tappable>
+    <img src="../../../assets/img/play-song.png">
+  </ion-avatar>
+  <ion-label>
+    <h2>{{track.title}}</h2>
+    <p>{{track.artist_name}}</p>
+    <p slot="end">{{track.year}}</p>
+  </ion-label>
+  <ion-label slot="end" text-right>
+    <ion-button fill="clear" shape="round" [color]="loop ? 'primary' : 'dark'" (click)='handleLoop()'>
+      <ion-icon slot="icon-only" name="repeat"></ion-icon>
+    </ion-button>
+  </ion-label>
+</ion-item>
