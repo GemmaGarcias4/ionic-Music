@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Platform, ToastController } from '@ionic/angular';
 import authdata from '../../assets/authdata.json';
-import { TextAst } from '@angular/compiler';
 
 const TOKEN_KEY = 'Basic bWFnaWNhbGtleTpzdXBlcnNlY3JldA==';
 
