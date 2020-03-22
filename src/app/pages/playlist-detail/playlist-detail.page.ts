@@ -13,6 +13,7 @@ export class PlaylistDetailPage implements OnInit {
   playlistId: any;
   detailData: any;
   trackList: Item[];
+  audioSrc: string;
 
   constructor(private route: ActivatedRoute, private playlistsService: PlaylistsService) { }
 
@@ -26,5 +27,11 @@ export class PlaylistDetailPage implements OnInit {
       },
       (error: any) => {console.log('Playlist error:', error); }
     );
+  }
+
+  handlePlayOne( audioSrc: string) {
+    if (audioSrc) {
+      this.audioSrc = `${audioSrc}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`;
+    }
   }
 }

@@ -1,5 +1,5 @@
-<ion-item >
-  <audio src="https://edge.musictime.app/api/v1/tracks/80947419/cdn-url?playlist_id=23324398&country_code=za&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282" controls loop>
+<ion-item>
+  <audio [src]="srcAudio.url" controls loop [autoplay]="srcAudio.autoplay">
     <p>Tu navegador no implementa el elemento audio</p>
   </audio>
 </ion-item>

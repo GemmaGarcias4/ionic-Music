@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../../../../interfaces/playlists/detail';
 
 @Component({
@@ -9,6 +9,7 @@ import { Item } from '../../../../interfaces/playlists/detail';
 export class TrackComponent implements OnInit {
 
   @Input() track: Item;
+  @Output() clickTrackToPlay = new EventEmitter<string>();
   loop = false;
 
   constructor() { }
@@ -20,7 +21,6 @@ export class TrackComponent implements OnInit {
   }
 
   handlePlay() {
-    console.log(this.track);
+    this.clickTrackToPlay.emit(this.track.cdn_clip_d);
   }
-
 }

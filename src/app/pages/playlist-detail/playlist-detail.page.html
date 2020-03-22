@@ -3,7 +3,10 @@
 <ion-content *ngIf="detailData">
   <app-board [detailData] = "detailData"></app-board>
   <ion-list *ngFor="let item of trackList" class="align-list-items">
-    <app-track [track] = "item"></app-track>
+    <app-track 
+      [track] = "item" 
+      (clickTrackToPlay)="handlePlayOne( $event )">
+    </app-track>
   </ion-list>
-  <app-audio-player></app-audio-player>
+  <app-audio-player [audio]="audioSrc"></app-audio-player>
 </ion-content>
