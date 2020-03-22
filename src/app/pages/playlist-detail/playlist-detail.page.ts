@@ -13,7 +13,7 @@ export class PlaylistDetailPage implements OnInit {
   playlistId: any;
   detailData: any;
   trackList: Item[];
-  audioSrc: string;
+  audioSrc: {url: string, loop: boolean, title: string};
 
   constructor(private route: ActivatedRoute, private playlistsService: PlaylistsService) { }
 
@@ -29,9 +29,13 @@ export class PlaylistDetailPage implements OnInit {
     );
   }
 
-  handlePlayOne( audioSrc: string) {
-    if (audioSrc) {
-      this.audioSrc = `${audioSrc}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`;
+  handlePlayOne( audio: {urlTrack: string, loop: boolean, title: string}) {
+    if (audio) {
+      this.audioSrc = {
+        url: `${audio.urlTrack}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`,
+        loop: audio.loop,
+        title: audio.title
+      }
     }
   }
 }

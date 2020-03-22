@@ -9,7 +9,7 @@ import { Item } from '../../../../interfaces/playlists/detail';
 export class TrackComponent implements OnInit {
 
   @Input() track: Item;
-  @Output() clickTrackToPlay = new EventEmitter<string>();
+  @Output() clickTrackToPlay = new EventEmitter<object>();
   loop = false;
 
   constructor() { }
@@ -21,6 +21,9 @@ export class TrackComponent implements OnInit {
   }
 
   handlePlay() {
-    this.clickTrackToPlay.emit(this.track.cdn_clip_d);
+    this.clickTrackToPlay.emit({
+      urlTrack: this.track.cdn_clip_d,
+      title: this.track.title,
+      loop: this.loop});
   }
 }

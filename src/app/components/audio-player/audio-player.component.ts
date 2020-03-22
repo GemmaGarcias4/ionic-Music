@@ -7,13 +7,18 @@ import { Component, OnChanges, Input } from '@angular/core';
 })
 export class AudioPlayerComponent implements OnChanges {
 
-  @Input() audio: string;
-  srcAudio: {url: string, autoplay: boolean};
+  @Input() audio: {url: string, loop: boolean, title: string};
+  srcAudio: {url: string, loop: boolean, autoplay: boolean, title: string};
 
   constructor() { }
 
   ngOnChanges() {
-    this.srcAudio = {url: this.audio, autoplay: true};
+    this.srcAudio = {
+      url: this.audio.url,
+      loop: this.audio.loop,
+      autoplay: true,
+      title: this.audio.title
+    };
   }
 
 }

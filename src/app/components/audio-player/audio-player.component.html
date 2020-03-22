@@ -1,5 +1,6 @@
-<ion-item>
-  <audio [src]="srcAudio.url" controls loop [autoplay]="srcAudio.autoplay">
+<ion-item class="audio-box">
+  <ion-title>{{srcAudio.title}}</ion-title>
+  <audio [src]="srcAudio.url" controls [loop]="srcAudio.loop" [autoplay]="srcAudio.autoplay">
     <p>Tu navegador no implementa el elemento audio</p>
   </audio>
 </ion-item>

@@ -8,5 +8,5 @@
       (clickTrackToPlay)="handlePlayOne( $event )">
     </app-track>
   </ion-list>
-  <app-audio-player [audio]="audioSrc"></app-audio-player>
+  <app-audio-player *ngIf="audioSrc" [audio]="audioSrc"></app-audio-player>
 </ion-content>
