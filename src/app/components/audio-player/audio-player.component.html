@@ -1,6 +1,32 @@
 <ion-item class="audio-box">
-  <ion-title>{{srcAudio.title}}</ion-title>
-  <audio [src]="srcAudio.url" controls [loop]="srcAudio.loop" [autoplay]="srcAudio.autoplay">
+  <audio hidden
+        #audioElement 
+        controls
+        [loop]="srcAudio.loop" 
+        [autoplay]="srcAudio.autoplay"
+        prelod="metadata">
+    <source [src]="srcAudio.url" type="audio/mpeg">
     <p>Tu navegador no implementa el elemento audio</p>
   </audio>
+</ion-item>
+<ion-item class="audio-box" color="secondary">
+  <div id="container ion-text-center">
+    <h2><span>Now playing: </span>{{audio.title}}</h2>
+    <div class="flex-box">
+      <ion-button fill="clear" color="light" shape="round">
+        <ion-icon slot="icon-only" name="repeat"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="light" shape="round">
+        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+      </ion-button>
+      <ion-button (click)="playPause()" fill="clear" shape="round" color="light">
+        <ion-icon slot="icon-only" [name]="playIcon"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="light" shape="round">
+        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-range min="0" [max]="audioDuration" [value]="currentPosition" mode="md" color="light"></ion-range>
+    <p class="ion-text-center">{{restTime}}</p>
+  </div>
 </ion-item>

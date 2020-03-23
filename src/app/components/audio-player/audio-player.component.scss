@@ -4,6 +4,29 @@
     padding: 20px;
     bottom: 0;
     position: fixed;
-    font-size: 12px;
     margin-bottom: 0px;
+
+    on-range{
+        padding: 0px, 10px;
+        --bar-height: 3px;
+    }
+
+    p{
+        font-size: 13px;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .flex-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ion-button{
+        height: 86px;
+        min-height: max-content;
+        margin: 0px 7px;
+        font-size: 21px;
+    }
 }
