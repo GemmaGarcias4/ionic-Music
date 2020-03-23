@@ -3,7 +3,7 @@
         #audioElement 
         controls
         [loop]="srcAudio.loop" 
-        [autoplay]="srcAudio.autoplay"
+        [autoplay]="true"
         prelod="metadata">
     <source [src]="srcAudio.url" type="audio/mpeg">
     <p>Tu navegador no implementa el elemento audio</p>
@@ -11,7 +11,7 @@
 </ion-item>
 <ion-item class="audio-box" color="secondary">
   <div id="container ion-text-center">
-    <h2><span>Now playing: </span>{{audio.title}}</h2>
+    <h2><span>Now playing: </span>{{srcAudio.title}}</h2>
     <div class="flex-box">
       <ion-button fill="clear" color="light" shape="round">
         <ion-icon slot="icon-only" name="repeat"></ion-icon>

@@ -10,35 +10,38 @@ import { stringify } from 'querystring';
 export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   @Input() audio: {url: string, loop: boolean, title: string};
-  srcAudio: {url: string, loop: boolean, autoplay: boolean, title: string};
+  srcAudio: {url: string, loop: boolean, title: string};
   playIcon = 'pause';
   audioDuration: number;
   currentPosition: number;
   restTime: string;
 
   @ViewChild('audioElement', { static: false }) public audioRef: ElementRef;
-  private audioEl: HTMLMediaElement;
+  private audioHtmlEl: HTMLMediaElement;
 
   constructor(public platform: Platform) {
     this.platform.ready().then(() => this.readAudio());
   }
 
   ngOnChanges() {
-    this.srcAudio = {
-      url: this.audio.url,
-      loop: this.audio.loop,
-      autoplay: true,
-      title: this.audio.title
-    };
+    if (this.srcAudio && this.audio.url !== this.srcAudio.url) {
+      this.audioHtmlEl.setAttribute('src', this.audio.url) ;
+
+      this.srcAudio = this.audio;
+      this.audioHtmlEl.play();
+      this.playIcon = 'pause';
+    } else {
+      this.srcAudio = this.audio;
+    }
   }
 
   readAudio() {
-    const audios = this.audioEl;
+    const audios = this.audioHtmlEl;
     audios.onloadeddata = () => {
       this.audioDuration = Math.floor(audios.duration);
     };
     audios.addEventListener('timeupdate', () => {
-      this.currentPosition = Math.floor(this.audioEl.currentTime);
+      this.currentPosition = Math.floor(this.audioHtmlEl.currentTime);
       this.convertSec(this.audioDuration - this.currentPosition);
     });
   }
@@ -53,13 +56,13 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   playPause() {
     if ( this.playIcon === 'pause' ) {
       this.playIcon = 'play';
-      this.audioEl.pause();
+      this.audioHtmlEl.pause();
     } else {
       this.playIcon = 'pause';
-      this.audioEl.play();
+      this.audioHtmlEl.play();
     }
   }
   public ngAfterViewInit() {
-    this.audioEl = this.audioRef.nativeElement;
+    this.audioHtmlEl = this.audioRef.nativeElement;
   }
 }
