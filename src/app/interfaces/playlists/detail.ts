@@ -67,7 +67,7 @@ export interface Item {
     year: number;
     urlTrack: string;
     loop: boolean;
-    reproduce: boolean;
+    active: boolean;
   }
 
 export interface Album {

@@ -25,7 +25,8 @@ export class TrackComponent implements OnInit {
 
   handlePlay() {
     this.clickTrackToPlay.emit({
-      id: this.track.id
+      id: this.track.id,
+      active: this.track.active
     });
   }
 }

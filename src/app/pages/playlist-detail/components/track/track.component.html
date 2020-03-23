@@ -1,7 +1,7 @@
 <ion-item>
   <ion-avatar slot="start" (click)="handlePlay()" tappable>
     <img 
-    [src]="track.reproduce ? '../../../assets/img/pause-button.png': '../../../assets/img/play-song.png'">
+    [src]="track.active ? '../../../assets/img/pause-button.png': '../../../assets/img/play-song.png'">
   </ion-avatar>
   <ion-label>
     <h2>{{track.title}}</h2>

@@ -28,7 +28,7 @@ export class PlaylistDetailPage implements OnInit {
             ...el,
             urlTrack: `${el.cdn_clip_d}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`,
             loop: false,
-            reproduce: false
+            active: false
           };
         });
       },
@@ -41,11 +41,11 @@ export class PlaylistDetailPage implements OnInit {
     if (audio.id) {
       const tracks = [...this.trackList].map((el, index) => {
         if (el.id === audio.id) {
-          el.reproduce = !el.reproduce;
+          el.active = !el.active;
           indexActive = index;
           return el;
         } else {
-          el.reproduce = false;
+          el.active = false;
           return el;
         }
       });
@@ -67,8 +67,8 @@ export class PlaylistDetailPage implements OnInit {
     let currentTrackIndex: number;
     this.trackList.forEach((track, index) => {if (track.id === event.id) {
       currentTrackIndex = index;
-      track.reproduce = false;
-      this.trackList[currentTrackIndex + 1].reproduce = true;
+      track.active = false;
+      this.trackList[currentTrackIndex + 1].active = true;
       this.trackActive = this.trackList[currentTrackIndex + 1];
       }
     });

@@ -22,33 +22,61 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   private audioHtmlEl: HTMLMediaElement;
 
   constructor(public platform: Platform) {
-    this.platform.ready().then(() => this.readAudio());
+    this.platform.ready().then(() => this.audioListener());
   }
 
   ngOnChanges() {
     if (this.srcAudio && this.audio.id !== this.srcAudio.id) {
       this.audioHtmlEl.setAttribute('src', this.audio.urlTrack);
       this.srcAudio = this.audio;
-      this.playIcon = 'pause';
+      this.onPlay();
     } else {
       this.srcAudio = this.audio;
     }
   }
 
-  readAudio() {
-    const audio = this.audioHtmlEl;
-    this.getAudioDuration(audio);
-    setInterval(() =>  this.timeUpdate(audio), 1000);
-    audio.addEventListener('ended',
-      () => {
-        this.playIcon = 'play',
-        this.nextSong(this.srcAudio.id);
-      }
-    );
+  handleAudioLoop() {
+    const { srcAudio } = this;
+    srcAudio.loop = !srcAudio.loop;
+    this.handleLoopFromPlayer.emit({ id: srcAudio.id, loop: srcAudio.loop });
   }
 
-  nextSong = (id: number) => {
+  handleOnPlayPause() {
+    if ( this.playIcon === 'pause' ) { this.onPause();
+    } else { this.onPlay(); }
+  }
+
+  onPlay() {
+    this.playIcon = 'pause';
+    this.audioHtmlEl.play();
+  }
+
+  onPause() {
+    this.playIcon = 'play';
+    this.audioHtmlEl.pause();
+  }
+
+  handleNextSong = (id: number) => {
     this.sendNextTrack.emit({id});
+  }
+
+  handlePrevSong = (id: number) => {
+    console.log('prev song')
+  }
+
+  audioListener() {
+    const audio = this.audioHtmlEl;
+    this.getAudioDuration(audio);
+    setInterval(() => this.getRestTimeUpdate(audio), 1000);
+    this.getNextSongAutomatically(audio);
+  }
+
+  getNextSongAutomatically(audio) {
+    audio.addEventListener('ended',
+    () => {
+      this.playIcon = 'play',
+      this.handleNextSong(this.srcAudio.id);
+    });
   }
 
   getAudioDuration = (audio: HTMLMediaElement) => {
@@ -57,10 +85,10 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     };
   }
 
-  timeUpdate = (audio: HTMLMediaElement) => {
+  getRestTimeUpdate = (audio: HTMLMediaElement) => {
     audio.addEventListener('timeupdate', () => {
       this.currentPosition = Math.floor(this.audioHtmlEl.currentTime);
-      this.convertSec(this.audioDuration - this.currentPosition);
+      this.restTime = this.convertSec(this.audioDuration - this.currentPosition);
     });
   }
 
@@ -68,25 +96,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     const min = Math.floor((seconds / 60 / 60) * 60);
     const sec = Math.floor(((seconds / 60 / 60) * 60 - min) * 60);
     const secD = sec < 10 ? `0${sec}` : sec;
-    this.restTime = `${min}:${secD}`;
-  }
-
-  playPause() {
-    if ( this.playIcon === 'pause' ) {
-      this.playIcon = 'play';
-      this.audioHtmlEl.pause();
-    } else {
-      this.playIcon = 'pause';
-      this.audioHtmlEl.play();
-    }
-  }
-
-  handleAudioLoop() {
-    this.srcAudio.loop = !this.srcAudio.loop;
-    this.handleLoopFromPlayer.emit({
-      id: this.srcAudio.id,
-      loop: this.srcAudio.loop
-    });
+    return `${min}:${secD}`;
   }
 
   public ngAfterViewInit() {
