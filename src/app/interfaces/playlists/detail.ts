@@ -65,6 +65,9 @@ export interface Item {
     version_title?: any;
     volume: number;
     year: number;
+    urlTrack: string;
+    loop: boolean;
+    reproduce: boolean;
   }
 
 export interface Album {

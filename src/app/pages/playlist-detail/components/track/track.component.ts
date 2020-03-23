@@ -10,6 +10,7 @@ export class TrackComponent implements OnInit {
 
   @Input() track: Item;
   @Output() clickTrackToPlay = new EventEmitter<object>();
+  @Output() clickLoopBtn = new EventEmitter<object>();
   loop = false;
 
   constructor() { }
@@ -18,12 +19,15 @@ export class TrackComponent implements OnInit {
 
   handleLoop() {
     this.loop = !this.loop;
+    this.clickLoopBtn.emit({
+      id: this.track.id,
+      loop: this.loop
+    });
   }
 
   handlePlay() {
     this.clickTrackToPlay.emit({
-      urlTrack: this.track.cdn_clip_d,
-      title: this.track.title,
-      loop: this.loop});
+      id: this.track.id
+    });
   }
 }

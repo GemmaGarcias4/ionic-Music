@@ -1,6 +1,6 @@
-import { Component, OnChanges, Input, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnChanges, Input, Output, ViewChild, ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { stringify } from 'querystring';
+import { Item } from '../../interfaces/playlists/detail';
 
 @Component({
   selector: 'app-audio-player',
@@ -9,8 +9,9 @@ import { stringify } from 'querystring';
 })
 export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
-  @Input() audio: {url: string, loop: boolean, title: string};
-  srcAudio: {url: string, loop: boolean, title: string};
+  @Input() audio: Item;
+  @Output() sendNextTrack = new EventEmitter<object>();
+  srcAudio: Item;
   playIcon = 'pause';
   audioDuration: number;
   currentPosition: number;
@@ -24,11 +25,10 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges() {
-    if (this.srcAudio && this.audio.url !== this.srcAudio.url) {
-      this.audioHtmlEl.setAttribute('src', this.audio.url) ;
-      this.audioHtmlEl.setAttribute('loop', stringify(this.audio.loop));
+    if (this.srcAudio && this.audio.id !== this.srcAudio.id) {
+      console.log('onchange')
+      this.audioHtmlEl.setAttribute('src', this.audio.urlTrack);
       this.srcAudio = this.audio;
-      this.audioHtmlEl.play();
       this.playIcon = 'pause';
     } else {
       this.srcAudio = this.audio;
@@ -36,11 +36,29 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   }
 
   readAudio() {
-    const audios = this.audioHtmlEl;
-    audios.onloadeddata = () => {
-      this.audioDuration = Math.floor(audios.duration);
+    const audio = this.audioHtmlEl;
+    this.getAudioDuration(audio);
+    setInterval(() =>  this.timeUpdate(audio), 1000);
+    audio.addEventListener('ended',
+      () => {
+        this.playIcon = 'play',
+        this.nextSong(this.srcAudio.id);
+      }
+    );
+  }
+
+  nextSong = (id: number) => {
+    this.sendNextTrack.emit({id});
+  }
+
+  getAudioDuration = (audio: HTMLMediaElement) => {
+    audio.onloadeddata = () => {
+      this.audioDuration = Math.floor(audio.duration);
     };
-    audios.addEventListener('timeupdate', () => {
+  }
+
+  timeUpdate = (audio: HTMLMediaElement) => {
+    audio.addEventListener('timeupdate', () => {
       this.currentPosition = Math.floor(this.audioHtmlEl.currentTime);
       this.convertSec(this.audioDuration - this.currentPosition);
     });

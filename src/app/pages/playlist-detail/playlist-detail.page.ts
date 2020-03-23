@@ -13,7 +13,7 @@ export class PlaylistDetailPage implements OnInit {
   playlistId: any;
   detailData: any;
   trackList: Item[];
-  audioSrc: {url: string, loop: boolean, title: string};
+  trackActive: Item;
 
   constructor(private route: ActivatedRoute, private playlistsService: PlaylistsService) { }
 
@@ -23,19 +23,54 @@ export class PlaylistDetailPage implements OnInit {
     .subscribe(
       (data: any) => {
         this.detailData = data,
-        this.trackList = data.playlist.tracks.items;
+        this.trackList = data.playlist.tracks.items.map((el: any) => {
+          return {
+            ...el,
+            urlTrack: `${el.cdn_clip_d}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`,
+            loop: false,
+            reproduce: false
+          };
+        });
       },
       (error: any) => {console.log('Playlist error:', error); }
     );
   }
 
-  handlePlayOne( audio: {urlTrack: string, loop: boolean, title: string}) {
-    if (audio) {
-      this.audioSrc = {
-        url: `${audio.urlTrack}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`,
-        loop: audio.loop,
-        title: audio.title
-      }
+  handlePlayOne( audio: {id: number}) {
+    let indexActive: number;
+    if (audio.id) {
+      const tracks = [...this.trackList].map((el, index) => {
+        if (el.id === audio.id) {
+          el.reproduce = !el.reproduce;
+          indexActive = index;
+          return el;
+        } else {
+          el.reproduce = false;
+          return el;
+        }
+      });
+      this.trackList = tracks;
+      this.trackActive = tracks[indexActive];
     }
+  }
+
+  handleLoop( event: {id: number, loop: boolean}){
+    const setLoop = [...this.trackList].map((track) => {
+      if ( track.id === event.id) {
+        track.loop = event.loop; return track;
+      } else { return track; }
+    });
+    this.trackList = setLoop;
+  }
+
+  nextTrack( event: {id: number}) {
+    let currentTrackIndex: number;
+    this.trackList.forEach((track, index) => {if (track.id === event.id) {
+      currentTrackIndex = index;
+      track.reproduce = false;
+      this.trackList[currentTrackIndex + 1].reproduce = true;
+      this.trackActive = this.trackList[currentTrackIndex + 1];
+      }
+    });
   }
 }
