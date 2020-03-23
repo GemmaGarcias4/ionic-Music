@@ -26,7 +26,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   ngOnChanges() {
     if (this.srcAudio && this.audio.url !== this.srcAudio.url) {
       this.audioHtmlEl.setAttribute('src', this.audio.url) ;
-
+      this.audioHtmlEl.setAttribute('loop', stringify(this.audio.loop));
       this.srcAudio = this.audio;
       this.audioHtmlEl.play();
       this.playIcon = 'pause';
