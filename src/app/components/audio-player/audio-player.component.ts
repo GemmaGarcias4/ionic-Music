@@ -11,6 +11,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   @Input() audio: Item;
   @Output() sendNextTrack = new EventEmitter<object>();
+  @Output() handleLoopFromPlayer = new EventEmitter<object>();
   srcAudio: Item;
   playIcon = 'pause';
   audioDuration: number;
@@ -26,7 +27,6 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges() {
     if (this.srcAudio && this.audio.id !== this.srcAudio.id) {
-      console.log('onchange')
       this.audioHtmlEl.setAttribute('src', this.audio.urlTrack);
       this.srcAudio = this.audio;
       this.playIcon = 'pause';
@@ -80,6 +80,15 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
       this.audioHtmlEl.play();
     }
   }
+
+  handleAudioLoop() {
+    this.srcAudio.loop = !this.srcAudio.loop;
+    this.handleLoopFromPlayer.emit({
+      id: this.srcAudio.id,
+      loop: this.srcAudio.loop
+    });
+  }
+
   public ngAfterViewInit() {
     this.audioHtmlEl = this.audioRef.nativeElement;
   }

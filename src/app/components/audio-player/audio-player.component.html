@@ -13,7 +13,7 @@
   <div id="container ion-text-center">
     <h2><span>Now playing: </span>{{srcAudio.title}}</h2>
     <div class="flex-box">
-      <ion-button fill="clear" color="light" shape="round">
+      <ion-button fill="clear" [color]="srcAudio.loop ? 'medium' : 'light'" shape="round" (click)="handleAudioLoop()">
         <ion-icon slot="icon-only" name="repeat"></ion-icon>
       </ion-button>
       <ion-button fill="clear" color="light" shape="round">

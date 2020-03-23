@@ -11,17 +11,15 @@ export class TrackComponent implements OnInit {
   @Input() track: Item;
   @Output() clickTrackToPlay = new EventEmitter<object>();
   @Output() clickLoopBtn = new EventEmitter<object>();
-  loop = false;
 
   constructor() { }
 
   ngOnInit() {}
 
   handleLoop() {
-    this.loop = !this.loop;
     this.clickLoopBtn.emit({
       id: this.track.id,
-      loop: this.loop
+      loop: !this.track.loop
     });
   }
 

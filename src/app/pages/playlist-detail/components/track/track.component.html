@@ -9,7 +9,7 @@
     <p slot="end">{{track.year}}</p>
   </ion-label>
   <ion-label slot="end" class="ion-text-right">
-    <ion-button fill="clear" shape="round" [color]="loop ? 'primary' : 'dark'" (click)="handleLoop()">
+    <ion-button fill="clear" shape="round" [color]="track.loop ? 'primary' : 'dark'" (click)="handleLoop()">
       <ion-icon slot="icon-only" name="repeat"></ion-icon>
     </ion-button>
   </ion-label>
