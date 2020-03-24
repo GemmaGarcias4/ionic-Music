@@ -76,7 +76,7 @@ export class PlaylistDetailPage implements OnInit {
 
   prevTrack( event: {id: number}) {
     this.trackList.forEach((track, index) => {if (track.id === event.id) {
-      const currentTrackIndex = index > 0 ? index - 1 : 0;
+      const currentTrackIndex = index;
       track.active = false;
       this.trackList[currentTrackIndex - 1].active = true;
       this.trackActive = this.trackList[currentTrackIndex - 1];

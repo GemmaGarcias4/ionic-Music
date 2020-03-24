@@ -6,7 +6,10 @@
       size-sm= "6"
       size-md= "4"
       size-lg= "2.4">
-      <img src="{{detailData.playlist.image_320x320}}" (click)="handlePlaylist()" tappable/>
+      <div class="img-wrapper">
+        <img src="{{detailData.playlist.image_320x320}}" class="listImg" tappable/>
+        <img src="../../../../../assets/img/play-white.png" (click)="handlePlaylist()" class="play"/>
+      </div>
     </ion-col>
     <ion-col
       size="3" 

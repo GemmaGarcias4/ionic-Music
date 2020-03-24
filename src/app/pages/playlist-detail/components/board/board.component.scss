@@ -1,0 +1,18 @@
+.img-wrapper{
+    position: relative; 
+    left: 0; 
+    top: 0;
+    .listImg
+    {
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+    .play
+    {
+      position: absolute;
+      width: 50%;
+      top: 60px;
+      left: 80px;
+    }
+}
