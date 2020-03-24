@@ -36,25 +36,7 @@ export class PlaylistDetailPage implements OnInit {
     );
   }
 
-  handlePlayOne( audio: {id: number}) {
-    let indexActive: number;
-    if (audio.id) {
-      const tracks = [...this.trackList].map((el, index) => {
-        if (el.id === audio.id) {
-          el.active = !el.active;
-          indexActive = index;
-          return el;
-        } else {
-          el.active = false;
-          return el;
-        }
-      });
-      this.trackList = tracks;
-      this.trackActive = tracks[indexActive];
-    }
-  }
-
-  handleLoop( event: {id: number, loop: boolean}){
+  handleLoop( event: {id: number, loop: boolean}) {
     const setLoop = [...this.trackList].map((track) => {
       if ( track.id === event.id) {
         track.loop = event.loop; return track;
@@ -63,14 +45,47 @@ export class PlaylistDetailPage implements OnInit {
     this.trackList = setLoop;
   }
 
+  handlePlayOne( audio: {id: number, active: boolean}) {
+    let indexActive: number;
+    if (audio.id) {
+      const tracks = [...this.trackList].map((el, index) => {
+        if (el.id === audio.id) {
+          el.active = audio.active;
+          indexActive = index;
+          return el;
+        } else {
+          el.active = false;
+          return el;
+        }
+      });
+
+      this.trackList = tracks;
+      this.trackActive = tracks[indexActive];
+    }
+  }
+
   nextTrack( event: {id: number}) {
-    let currentTrackIndex: number;
     this.trackList.forEach((track, index) => {if (track.id === event.id) {
-      currentTrackIndex = index;
+      const currentTrackIndex = index;
       track.active = false;
       this.trackList[currentTrackIndex + 1].active = true;
       this.trackActive = this.trackList[currentTrackIndex + 1];
       }
     });
+  }
+
+  prevTrack( event: {id: number}) {
+    this.trackList.forEach((track, index) => {if (track.id === event.id) {
+      const currentTrackIndex = index > 0 ? index - 1 : 0;
+      track.active = false;
+      this.trackList[currentTrackIndex - 1].active = true;
+      this.trackActive = this.trackList[currentTrackIndex - 1];
+      }
+    });
+  }
+
+  playFirstTrack( event: {play: boolean} ) {
+    const param = {id: this.trackList[0].id, active: true};
+    this.handlePlayOne(param);
   }
 }

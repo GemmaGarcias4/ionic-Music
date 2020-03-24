@@ -10,8 +10,11 @@ import { Item } from '../../interfaces/playlists/detail';
 export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   @Input() audio: Item;
+  @Input() active: boolean;
   @Output() sendNextTrack = new EventEmitter<object>();
+  @Output() sendPrevTrack = new EventEmitter<object>();
   @Output() handleLoopFromPlayer = new EventEmitter<object>();
+  @Output() playTrackFromPlayer = new EventEmitter<object>();
   srcAudio: Item;
   playIcon = 'pause';
   audioDuration: number;
@@ -32,36 +35,46 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
       this.onPlay();
     } else {
       this.srcAudio = this.audio;
+      if (this.srcAudio && this.active) {
+        this.onPlay();
+      } else {
+        this.onPause();
+      }
     }
   }
 
   handleAudioLoop() {
-    const { srcAudio } = this;
-    srcAudio.loop = !srcAudio.loop;
-    this.handleLoopFromPlayer.emit({ id: srcAudio.id, loop: srcAudio.loop });
+    const { id, loop } = this.srcAudio;
+    this.srcAudio.loop = !loop;
+    this.handleLoopFromPlayer.emit({ id, loop });
   }
 
   handleOnPlayPause() {
+    const {id, active} = this.srcAudio;
     if ( this.playIcon === 'pause' ) { this.onPause();
     } else { this.onPlay(); }
+
+    this.playTrackFromPlayer.emit({ id, active: !active });
   }
 
   onPlay() {
     this.playIcon = 'pause';
-    this.audioHtmlEl.play();
+    if (this.audioHtmlEl) { this.audioHtmlEl.play() }
   }
 
   onPause() {
     this.playIcon = 'play';
-    this.audioHtmlEl.pause();
+    if (this.audioHtmlEl) { this.audioHtmlEl.pause() }
   }
 
-  handleNextSong = (id: number) => {
+  handleNextSong = () => {
+    const { id } = this.srcAudio;
     this.sendNextTrack.emit({id});
   }
 
-  handlePrevSong = (id: number) => {
-    console.log('prev song')
+  handlePrevSong = () => {
+    const { id } = this.srcAudio;
+    this.sendPrevTrack.emit({id});
   }
 
   audioListener() {
@@ -71,11 +84,11 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     this.getNextSongAutomatically(audio);
   }
 
-  getNextSongAutomatically(audio) {
+  getNextSongAutomatically(audio: HTMLMediaElement) {
     audio.addEventListener('ended',
     () => {
       this.playIcon = 'play',
-      this.handleNextSong(this.srcAudio.id);
+      this.handleNextSong();
     });
   }
 

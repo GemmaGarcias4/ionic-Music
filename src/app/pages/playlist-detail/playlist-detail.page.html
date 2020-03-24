@@ -1,13 +1,21 @@
 <app-header title="Playlist detail" [hasBackButton]=true></app-header>
 
 <ion-content *ngIf="detailData">
-  <app-board [detailData] = "detailData"></app-board>
+  <app-board [detailData] = "detailData" (playFromBoardPlaylist)="playFirstTrack( $event )"></app-board>
   <ion-list *ngFor="let item of trackList" class="align-list-items">
     <app-track 
       [track] = "item" 
-      (clickTrackToPlay)="handlePlayOne( $event )"
-      (clickLoopBtn)="handleLoop( $event )">
+      (playTrack)="handlePlayOne( $event )"
+      (handleLoopFromTrack)="handleLoop( $event )">
     </app-track>
   </ion-list>
-  <app-audio-player *ngIf="trackActive" (sendNextTrack)="nextTrack( $event )" [audio]="trackActive"></app-audio-player>
+  <app-audio-player 
+    *ngIf="trackActive" 
+    (handleLoopFromPlayer)="handleLoop( $event )"
+    (playTrackFromPlayer)="handlePlayOne( $event )"
+    (sendNextTrack)="nextTrack( $event )" 
+    (sendPrevTrack)="prevTrack( $event )"
+    [audio]="trackActive"
+    [active]="trackActive.active"
+  ></app-audio-player>
 </ion-content>

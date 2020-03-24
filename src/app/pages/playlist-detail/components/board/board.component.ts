@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -8,7 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BoardComponent implements OnInit {
 
   @Input() detailData: any;
+  @Output() playFromBoardPlaylist = new EventEmitter<object>();
   dataObj: any;
+  playAllTracks: boolean;
 
   constructor() { }
 
@@ -16,4 +18,8 @@ export class BoardComponent implements OnInit {
     this.dataObj = this.detailData;
   }
 
+  handlePlaylist() {
+    this.playAllTracks = !this.playAllTracks;
+    this.playFromBoardPlaylist.emit({play: true});
+  }
 }
