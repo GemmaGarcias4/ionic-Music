@@ -20,6 +20,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   audioDuration: number;
   currentPosition: number;
   restTime: string;
+  durationTime: string;
 
   @ViewChild('audioElement', { static: false }) public audioRef: ElementRef;
   private audioHtmlEl: HTMLMediaElement;
@@ -79,7 +80,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   audioListener() {
     const audio = this.audioHtmlEl;
-    this.getAudioDuration(audio);
+    this.getDurationVars();
     setInterval(() => this.getRestTimeUpdate(audio), 1000);
     this.getNextSongAutomatically(audio);
   }
@@ -92,22 +93,21 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     });
   }
 
-  getAudioDuration = (audio: HTMLMediaElement) => {
-    audio.onloadeddata = () => {
-      this.audioDuration = Math.floor(audio.duration);
-    };
+  getDurationVars() {
+    this.audioDuration = this.srcAudio.duration;
+    this.durationTime = this.convertSec(this.srcAudio.duration);
   }
 
   getRestTimeUpdate = (audio: HTMLMediaElement) => {
     audio.addEventListener('timeupdate', () => {
       this.currentPosition = Math.floor(this.audioHtmlEl.currentTime);
-      this.restTime = this.convertSec(this.audioDuration - this.currentPosition);
+      this.restTime = this.convertSec(this.currentPosition);
     });
   }
 
   convertSec(seconds: number) {
-    const min = Math.floor((seconds / 60 / 60) * 60);
-    const sec = Math.floor(((seconds / 60 / 60) * 60 - min) * 60);
+    const min = Math.floor((seconds / 60));
+    const sec = Math.floor(((seconds / 60) - min) * 60);
     const secD = sec < 10 ? `0${sec}` : sec;
     return `${min}:${secD}`;
   }

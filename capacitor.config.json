@@ -1,0 +1,8 @@
+{
+  "appId": "com.ionic.music",
+  "appName": "ionic-Music",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

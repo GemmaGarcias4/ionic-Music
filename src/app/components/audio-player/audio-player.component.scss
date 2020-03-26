@@ -1,15 +1,14 @@
 .audio-box{
     background-color: #49aaf1;
-    width: 100%;
-    padding: 20px;
+    width: 100vw;
     bottom: 0;
     position: fixed;
     margin-bottom: 0px;
+    font-size: 20px;
 
     audio {display:none !important;} 
 
     on-range{
-        padding: 0px, 10px;
         --bar-height: 3px;
     }
 
@@ -20,6 +19,7 @@
     }
 
     .flex-box{
+        width: 80vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,6 +29,7 @@
         height: 86px;
         min-height: max-content;
         margin: 0px 7px;
-        font-size: 21px;
+        font-size: 17px;
+        
     }
 }
