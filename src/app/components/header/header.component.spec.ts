@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
+import { Storage } from '@ionic/storage';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -10,6 +10,11 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
+      providers: [
+        {
+          provide: Storage
+        }
+      ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
