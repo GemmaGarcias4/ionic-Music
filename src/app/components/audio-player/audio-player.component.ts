@@ -60,12 +60,12 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   onPlay() {
     this.playIcon = 'pause';
-    if (this.audioHtmlEl) { this.audioHtmlEl.play() }
+    if (this.audioHtmlEl) { this.audioHtmlEl.play(); }
   }
 
   onPause() {
     this.playIcon = 'play';
-    if (this.audioHtmlEl) { this.audioHtmlEl.pause() }
+    if (this.audioHtmlEl) { this.audioHtmlEl.pause(); }
   }
 
   handleNextSong = () => {
@@ -80,9 +80,11 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
 
   audioListener() {
     const audio = this.audioHtmlEl;
-    this.getDurationVars();
-    setInterval(() => this.getRestTimeUpdate(audio), 1000);
-    this.getNextSongAutomatically(audio);
+    if (audio) {
+      this.getDurationVars();
+      setInterval(() => this.getRestTimeUpdate(audio), 1000);
+      this.getNextSongAutomatically(audio);
+    }
   }
 
   getNextSongAutomatically(audio: HTMLMediaElement) {
@@ -94,7 +96,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
   }
 
   getDurationVars() {
-    this.audioDuration = this.srcAudio.duration;
+    this.audioDuration = this.srcAudio && this.srcAudio.duration;
     this.durationTime = this.convertSec(this.srcAudio.duration);
   }
 

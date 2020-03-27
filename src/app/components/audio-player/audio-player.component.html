@@ -1,8 +1,8 @@
-<ion-item class="audio-box">
+<ion-item class="audio-box" *ngIf="srcAudio">
   <audio hidden
         #audioElement 
         controls
-        [loop]="srcAudio.loop" 
+        [loop]="srcAudio ? srcAudio.loop : false" 
         [autoplay]="true"
         prelod="metadata">
     <source [src]="srcAudio.urlTrack" type="audio/mpeg">
