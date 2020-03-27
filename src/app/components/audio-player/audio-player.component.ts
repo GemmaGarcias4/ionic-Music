@@ -105,6 +105,12 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     });
   }
 
+  changeRangePosition = (event) => {
+    if (event.detail.value !== this.currentPosition) {
+      this.audioHtmlEl.currentTime = event.detail.value;
+    }
+  }
+
   convertSec(seconds: number) {
     const min = Math.floor((seconds / 60));
     const sec = Math.floor(((seconds / 60) - min) * 60);

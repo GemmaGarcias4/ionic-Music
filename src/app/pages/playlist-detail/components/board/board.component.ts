@@ -10,7 +10,7 @@ export class BoardComponent implements OnInit {
   @Input() detailData: any;
   @Output() playFromBoardPlaylist = new EventEmitter<object>();
   dataObj: any;
-  playAllTracks: boolean;
+  playAllTracks= false;
 
   constructor() { }
 
@@ -21,5 +21,13 @@ export class BoardComponent implements OnInit {
   handlePlaylist() {
     this.playAllTracks = !this.playAllTracks;
     this.playFromBoardPlaylist.emit({play: true});
+  }
+
+  coverImagePlay() {
+    if(this.playAllTracks){
+      return "../../../../../assets/img/pause-blue.png"
+    } else {
+      return "../../../../../assets/img/play-white.png"
+    }
   }
 }

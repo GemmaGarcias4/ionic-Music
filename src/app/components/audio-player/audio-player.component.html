@@ -27,7 +27,8 @@
         <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
       </ion-button>
     </div>
-    <ion-range min="0" [max]="audioDuration" [value]="currentPosition" mode="md" color="light">
+    <ion-range  (ionChange)="changeRangePosition( $event )" min="0" [max]="audioDuration" [value]="currentPosition" 
+      mode="md" color="light">
       <ion-label slot="start">{{restTime}}</ion-label>
       <ion-label slot="end">{{durationTime}}</ion-label>
     </ion-range>
