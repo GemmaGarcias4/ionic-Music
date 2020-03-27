@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PlaylistsPage } from './playlists.page';
 import { PlaylistsService } from '../../services/playlists.service';
 import { ComponentsModule } from '../../components/components.module';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ComponentsModule } from '../../components/components.module';
     ComponentsModule
   ],
   declarations: [PlaylistsPage],
-  providers: [PlaylistsService]
+  providers: [PlaylistsService, HeaderComponent],
 })
 
 export class PlaylistsPageModule {

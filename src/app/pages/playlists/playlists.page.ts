@@ -15,7 +15,7 @@ export class PlaylistsPage implements OnInit {
   ngOnInit() {
     this.playlistsService.getPlaylistDataList()
     .subscribe(
-      (res) => { this.groupedArray(res.results.items); },
+      (res) => { this.groupedArray(res); },
       (error) => {console.log(error); }
     );
   }

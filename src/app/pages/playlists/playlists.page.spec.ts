@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { PlaylistsPage } from './playlists.page';
+import { HeaderComponent } from '../../components/header/header.component';
 
 describe('PlaylistsPage', () => {
   let component: PlaylistsPage;
@@ -9,7 +10,7 @@ describe('PlaylistsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PlaylistsPage],
+      declarations: [PlaylistsPage, HeaderComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

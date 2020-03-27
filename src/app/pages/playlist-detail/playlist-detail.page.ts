@@ -23,7 +23,7 @@ export class PlaylistDetailPage implements OnInit {
     .subscribe(
       (data: any) => {
         this.detailData = data,
-        this.trackList = data.playlist.tracks.items.map((el: any) => {
+        this.trackList = data.tracks.items.map((el: any) => {
           return {
             ...el,
             urlTrack: `${el.cdn_clip_d}&user_id=bd84ae06-cb86-476e-ad1f-530c3ce5d282`,
