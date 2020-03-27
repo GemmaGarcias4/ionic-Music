@@ -1,4 +1,4 @@
-<ion-item>
+<ion-item *ngIf="track">
   <ion-avatar slot="start" (click)="handlePlay()" tappable>
     <img 
     [src]="track.active ? '../../../assets/img/pause-button.png': '../../../assets/img/play-song.png'">
