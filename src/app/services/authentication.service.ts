@@ -34,12 +34,12 @@ export class AuthenticationService {
     }
   }
 
-  login(form: { value: any; }) {
-    this.verifyUser(form.value);
+  login(user: { email: string, password: string }) {
+    this.verifyUser(user);
   }
 
   async logout() {
-    await this.storage.remove(TOKEN_KEY);
+    await this.storage.remove('token');
     this.authenticationState.next(false);
   }
 

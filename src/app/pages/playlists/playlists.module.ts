@@ -22,5 +22,5 @@ import { HeaderComponent } from '../../components/header/header.component';
 
 export class PlaylistsPageModule {
 
-  constructor(private playlistsService: PlaylistsService) { }
+  constructor() { }
 }

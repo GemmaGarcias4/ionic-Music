@@ -1,6 +1,6 @@
 {
   "appId": "com.ionic.music",
-  "appName": "ionic-Music",
+  "appName": "ionicMusic",
   "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "www",
