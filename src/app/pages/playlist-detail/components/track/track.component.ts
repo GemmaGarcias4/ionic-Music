@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Item } from '../../../../interfaces/playlists/detail';
 
 @Component({
@@ -12,7 +13,7 @@ export class TrackComponent implements OnInit {
   @Output() playTrack = new EventEmitter<object>();
   @Output() handleLoopFromTrack = new EventEmitter<object>();
 
-  constructor() { }
+  constructor(private socialSharing: SocialSharing) { }
 
   ngOnInit() {}
 
@@ -25,4 +26,14 @@ export class TrackComponent implements OnInit {
     const {id, active} = this.track;
     this.playTrack.emit({ id, active: !active });
   }
+
+  handleShare() {
+    this.socialSharing.share(
+      this.track.title,
+      this.track.artist_name,
+      null,
+      this.track.cover
+    );
+  }
+
 }

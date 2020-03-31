@@ -13,6 +13,7 @@ import { ComponentsModule } from './components/components.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +28,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     PlaylistsService
   ],
