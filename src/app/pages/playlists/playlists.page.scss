@@ -10,9 +10,16 @@
         text-align: left;
     }
     ion-card {
+        margin: 0px;
         &.no-border {
            border: none !important; 
            box-shadow: none;
         }
+    }
+    ion-card-header, ion-card-content {
+        margin-left: 0px;
+    }
+    .cover-img {
+        width: 90%;
     }
 }
