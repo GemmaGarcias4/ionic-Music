@@ -44,13 +44,13 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  handleAudioLoop() {
+  handleAudioLoop = () => {
     const { id, loop } = this.srcAudio;
     this.srcAudio.loop = !loop;
     this.handleLoopFromPlayer.emit({ id, loop });
   }
 
-  handleOnPlayPause() {
+  handleOnPlayPause = () => {
     const {id, active} = this.srcAudio;
     if ( this.playIcon === 'pause' ) { this.onPause();
     } else { this.onPlay(); }
@@ -58,12 +58,12 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     this.playTrackFromPlayer.emit({ id, active: !active });
   }
 
-  onPlay() {
+  onPlay = () => {
     this.playIcon = 'pause';
     if (this.audioHtmlEl) { this.audioHtmlEl.play(); }
   }
 
-  onPause() {
+  onPause = () => {
     this.playIcon = 'play';
     if (this.audioHtmlEl) { this.audioHtmlEl.pause(); }
   }
@@ -78,7 +78,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     this.sendPrevTrack.emit({id});
   }
 
-  audioListener() {
+  audioListener = () => {
     const audio = this.audioHtmlEl;
     if (audio) {
       this.getDurationVars();
@@ -87,7 +87,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  getNextSongAutomatically(audio: HTMLMediaElement) {
+  getNextSongAutomatically = (audio: HTMLMediaElement) => {
     audio.addEventListener('ended',
     () => {
       this.playIcon = 'play',
@@ -95,7 +95,7 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     });
   }
 
-  getDurationVars() {
+  getDurationVars = () => {
     this.audioDuration = this.srcAudio && this.srcAudio.duration;
     this.durationTime = this.convertSec(this.srcAudio.duration);
   }
@@ -113,14 +113,14 @@ export class AudioPlayerComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  convertSec(seconds: number) {
+  convertSec = (seconds: number) => {
     const min = Math.floor((seconds / 60));
     const sec = Math.floor(((seconds / 60) - min) * 60);
     const secD = sec < 10 ? `0${sec}` : sec;
     return `${min}:${secD}`;
   }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit = () => {
     this.audioHtmlEl = this.audioRef.nativeElement;
   }
 }
