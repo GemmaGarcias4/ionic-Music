@@ -6,7 +6,6 @@ import { Storage } from '@ionic/storage';
 describe('AuthGuardService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      AuthGuardService,
       {
         provide: Storage
       }

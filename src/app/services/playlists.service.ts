@@ -23,7 +23,7 @@ export class PlaylistsService {
   getPlaylistDataList() {
     return this.executeQuery<RootObjectList>('/playlists?except_attributes=tracks&user_id=1372a510-60b0-42c1-a3e1-8bdc64d37152')
     .pipe(
-      map(res => res.results.items)
+      map(res => res && res.results.items)
     );
   }
 
