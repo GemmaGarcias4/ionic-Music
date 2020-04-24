@@ -5,23 +5,26 @@
         <ion-grid>
           <ion-row>
             <ion-col 
-              size="2" 
               size-xs="12" 
-              size-sm= "6"
-              size-md= "4"
+              size-sm= "3"
+              size-md= "2"
               size-lg= "2.4" *ngFor="let item of groups">
                 <ion-card [routerLink]="[item.id]" class="fixline no-wrap-text no-border" routerDirection="forward" fixed>
                   <ion-grid>
                     <ion-row>
-                      <ion-col size-xs="6" size-sm="12">
+                      <ion-col size-xs="5" size-sm="12" class="ion-align-self-center">
                         <img src="{{item.image_52x52}}" />
                         </ion-col>
-                        <ion-col size="6" size-sm="12">
+                        <ion-col size="7" size-sm="12">
                         <ion-card-header>
                           <ion-card-title class="no-wrap-text">{{item.title}}</ion-card-title>
                         </ion-card-header>
                         <ion-card-content>
-                          {{item.type}}
+                          <ion-text color="secondary">{{item.playlist_items_count + " songs"}}</ion-text>
+                          <br>
+                          <ion-text color="secondary" class="no-wrap-text">{{item.duration}}</ion-text>
+                          <br>
+                          <ion-text class="no-wrap-text">{{item.artists[0].name}}</ion-text>
                         </ion-card-content>
                       </ion-col>
                     </ion-row>

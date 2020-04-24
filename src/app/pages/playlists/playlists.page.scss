@@ -9,10 +9,25 @@
     @media (max-width: 576px) {
         text-align: left;
     }
+    ion-card-header {
+        padding: 5px;
+        @media (max-width: 576px) {
+            padding: 15px 0px 0px 0px; 
+        }
+    }
+    ion-grid {
+        padding: 0px;
+    }
     ion-card {
         &.no-border {
            border: none !important; 
            box-shadow: none;
+        }
+        margin: 0px;
+        ion-card-content {
+            @media (max-width: 576px) {
+                padding: 0px;
+            }
         }
     }
 }
